@@ -842,8 +842,8 @@ MonoBehaviour:
   m_CoachingOverlay: {fileID: 0}
   m_VideoPlayer: {fileID: 1641376890}
   m_RawImage: {fileID: 1641376891}
-  m_FadeOnDuration: 0.5
-  m_FadeOffDuration: 1
+  m_FadeOnDuration: 0.1
+  m_FadeOffDuration: 0.25
   m_Transparent: {fileID: 2800000, guid: 6b52c83794be64e65bf826666f5a7f7d, type: 3}
 --- !u!114 &5977163238016480458
 MonoBehaviour:
