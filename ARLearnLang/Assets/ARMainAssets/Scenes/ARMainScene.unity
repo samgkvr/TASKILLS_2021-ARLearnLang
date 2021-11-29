@@ -540,6 +540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 0}
   ARSessionOrigin: {fileID: 388525030}
+  ARRaycastManager: {fileID: 388525033}
 --- !u!4 &702624893
 Transform:
   m_ObjectHideFlags: 0
