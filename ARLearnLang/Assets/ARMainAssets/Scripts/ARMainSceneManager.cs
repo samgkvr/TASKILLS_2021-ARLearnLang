@@ -8,7 +8,7 @@ public class ARMainSceneManager : MonoBehaviour
     public ARSessionOrigin ARSessionOrigin;
     public ARRaycastManager ARRaycastManager;
 
-    void Awake()
+    private void Awake()
     {
         Camera = ARSessionOrigin.camera;
     }

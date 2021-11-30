@@ -1,6 +1,6 @@
-using UnityEngine;
-using TMPro;
 using System.Collections;
+using TMPro;
+using UnityEngine;
 
 public class SceneCanvasObjectsManager : MonoBehaviour
 {
@@ -8,9 +8,6 @@ public class SceneCanvasObjectsManager : MonoBehaviour
     private ARSceneObjectManager m_ARSceneObjectManager;
 
     private ARMainSceneManager m_ARMainSceneManager;
-
-    [SerializeField]
-    private Canvas[] sceneCanvas;
 
     [SerializeField]
     private GameObject sceneCanvasObject;
@@ -35,9 +32,12 @@ public class SceneCanvasObjectsManager : MonoBehaviour
 
         m_ARMainSceneManager = m_ARSceneObjectManager.m_ARMainSceneManager;
 
-        for (int i = 0; i < sceneCanvas.Length; i++)
+        for (int i = 0; i < ModuleObjects.Length; i++)
         {
-            sceneCanvas[i].worldCamera = m_ARMainSceneManager.Camera;
+            for (int b = 0; b < ModuleObjects[i].GetComponent<SceneModuleObject>().LocalCanvas.Length; b++)
+            {
+                ModuleObjects[i].GetComponent<SceneModuleObject>().LocalCanvas[b].worldCamera = m_ARMainSceneManager.Camera;
+            }
         }
 
         if (!sceneCanvasObject.activeSelf)
@@ -68,7 +68,6 @@ public class SceneCanvasObjectsManager : MonoBehaviour
             TextAnswerScene.text = "Поздравляем!";
             TextAnswerScene.color = Color.green;
             StartCoroutine(TimerChangeScene(m_CurrentSceneID + 1));
-            //ChangeScene(m_CurrentSceneID + 1);
         }
         else
         {
@@ -86,7 +85,6 @@ public class SceneCanvasObjectsManager : MonoBehaviour
             TextAnswerScene.text = "Поздравляем!";
             TextAnswerScene.color = Color.green;
             StartCoroutine(TimerChangeScene(m_CurrentSceneID + 1));
-            //ChangeScene(m_CurrentSceneID + 1);
         }
         else
         {
@@ -120,8 +118,7 @@ public class SceneCanvasObjectsManager : MonoBehaviour
         Destroy(temp, 5);
     }
 
-
-    IEnumerator TimerChangeScene(int IDScene)
+    private IEnumerator TimerChangeScene(int IDScene)
     {
         yield return new WaitForSeconds(5);
         ChangeScene(IDScene);

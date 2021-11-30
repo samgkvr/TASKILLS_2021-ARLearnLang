@@ -64,9 +64,8 @@ public class InteractibleMenu : MonoBehaviour
             {
                 touchBegan = true;
                 Ray ray = m_ARMainSceneManager.Camera.ScreenPointToRay(Input.GetTouch(0).position);
-                RaycastHit hit;
 
-                if (Physics.Raycast(ray, out hit))
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
                     if (hit.collider != null)
                     {

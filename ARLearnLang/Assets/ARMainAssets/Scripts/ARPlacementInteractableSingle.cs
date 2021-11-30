@@ -39,7 +39,7 @@ public class ARPlacementInteractableSingle : ARBaseGestureInteractable
 {
     [SerializeField]
     [Tooltip("A GameObject to place when a raycast from a user touch hits a plane.")]
-    GameObject m_PlacementPrefab;
+    private GameObject m_PlacementPrefab;
 
     /// <summary>
     /// A <see cref="GameObject"/> to place when a raycast from a user touch hits a plane.
@@ -52,7 +52,7 @@ public class ARPlacementInteractableSingle : ARBaseGestureInteractable
 
     [SerializeField]
     [Tooltip("The LayerMask that is used during an additional raycast when a user touch does not hit any AR trackable planes.")]
-    LayerMask m_FallbackLayerMask;
+    private LayerMask m_FallbackLayerMask;
 
     /// <summary>
     /// The <see cref="LayerMask"/> that is used during an additional raycast
@@ -65,7 +65,7 @@ public class ARPlacementInteractableSingle : ARBaseGestureInteractable
     }
 
     [SerializeField]
-    ARObjectPlacementEventSingle m_ObjectPlaced = new ARObjectPlacementEventSingle();
+    private ARObjectPlacementEventSingle m_ObjectPlaced = new ARObjectPlacementEventSingle();
 
     /// <summary>
     /// Gets or sets the event that is called when this Interactable places a new <see cref="GameObject"/> in the world.
@@ -77,7 +77,7 @@ public class ARPlacementInteractableSingle : ARBaseGestureInteractable
     }
 
     [SerializeField]
-    GameObject m_PlacementObject;
+    private GameObject m_PlacementObject;
 
     /// <summary>
     /// Gets or sets the event that is called when this Interactable places a new <see cref="GameObject"/> in the world.
@@ -88,9 +88,8 @@ public class ARPlacementInteractableSingle : ARBaseGestureInteractable
         set => m_PlacementObject = value;
     }
 
-    readonly ARObjectPlacementEventArgsSingle m_ObjectPlacementEventArgs = new ARObjectPlacementEventArgsSingle();
-
-    static readonly List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
+    private readonly ARObjectPlacementEventArgsSingle m_ObjectPlacementEventArgs = new ARObjectPlacementEventArgsSingle();
+    private static readonly List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
     /// <summary>
     /// Gets the pose for the object to be placed from a raycast hit triggered by a <see cref="TapGesture"/>.
@@ -109,9 +108,11 @@ public class ARPlacementInteractableSingle : ARBaseGestureInteractable
             // Use hit pose and camera pose to check if hit test is from the
             // back of the plane, if it is, no need to create the anchor.
             // ReSharper disable once LocalVariableHidesMember -- hide deprecated camera property
-            var camera = arSessionOrigin != null ? arSessionOrigin.camera : Camera.main;
+            Camera camera = arSessionOrigin != null ? arSessionOrigin.camera : Camera.main;
             if (camera == null)
+            {
                 return false;
+            }
 
             return Vector3.Dot(camera.transform.position - pose.position, pose.rotation * Vector3.up) >= 0f;
         }
@@ -128,17 +129,19 @@ public class ARPlacementInteractableSingle : ARBaseGestureInteractable
     /// <seealso cref="placementPrefab"/>
     protected virtual GameObject PlaceObject(Pose pose)
     {
-        var placementObject = Instantiate(m_PlacementPrefab, pose.position, pose.rotation);
+        GameObject placementObject = Instantiate(m_PlacementPrefab, pose.position, pose.rotation);
 
         // Create anchor to track reference point and set it as the parent of placementObject.
-        var anchor = new GameObject("PlacementAnchor").transform;
+        Transform anchor = new GameObject("PlacementAnchor").transform;
         anchor.position = pose.position;
         anchor.rotation = pose.rotation;
         placementObject.transform.parent = anchor;
 
         // Use Trackables object in scene to use as parent
         if (arSessionOrigin != null && arSessionOrigin.trackablesParent != null)
+        {
             anchor.parent = arSessionOrigin.trackablesParent;
+        }
 
         return placementObject;
     }
@@ -164,12 +167,16 @@ public class ARPlacementInteractableSingle : ARBaseGestureInteractable
         base.OnEndManipulation(gesture);
 
         if (gesture.isCanceled)
+        {
             return;
+        }
 
         if (arSessionOrigin == null)
+        {
             return;
+        }
 
-        if (TryGetPlacementPose(gesture, out var pose))
+        if (TryGetPlacementPose(gesture, out Pose pose))
         {
             if (placementObject == null)
             {

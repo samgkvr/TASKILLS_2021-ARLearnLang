@@ -16,8 +16,8 @@ public class PlaceObjectsOnPlane : MonoBehaviour
 
     public UIManager UIManager
     {
-        get { return m_UIManager; }
-        set { m_UIManager = value; }
+        get => m_UIManager;
+        set => m_UIManager = value;
     }
 
     public void Place()
