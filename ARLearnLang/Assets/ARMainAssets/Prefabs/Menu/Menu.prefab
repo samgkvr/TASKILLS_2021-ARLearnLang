@@ -34405,6 +34405,7 @@ MonoBehaviour:
   - {fileID: 858833616405364720}
   - {fileID: 7940295305987139418}
   - {fileID: 8569845885727700637}
+  stateSelected: 0
   menuVariables:
   - {fileID: 6283035217233501556}
   - {fileID: 7262564569943683802}

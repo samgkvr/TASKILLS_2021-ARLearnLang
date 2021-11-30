@@ -220,7 +220,7 @@ PrefabInstance:
     - target: {fileID: 4993111582517699937, guid: f81d3a1928c05564ca5ed2093c61def1,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 576
+      value: 582
       objectReference: {fileID: 0}
     - target: {fileID: 5507067247106710563, guid: f81d3a1928c05564ca5ed2093c61def1,
         type: 3}
@@ -315,7 +315,7 @@ PrefabInstance:
     - target: {fileID: 8553184812921735887, guid: f81d3a1928c05564ca5ed2093c61def1,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 579
+      value: 588
       objectReference: {fileID: 0}
     - target: {fileID: 9087512575168438008, guid: f81d3a1928c05564ca5ed2093c61def1,
         type: 3}
@@ -349,21 +349,23 @@ MonoBehaviour:
   - Spatula
   - Plate
   - Cup
-  CorrectAnswer: 3
+  AnswerObjectPrefab: {fileID: 0}
+  CorrectAnswer: 2
   QuestionText2:
   - "\u0427\u0442\u043E \u044D\u0442\u043E \u0437\u0430 \u043E\u0431\u044A\u0435\u043A\u0442?"
   AnswerText2:
   - Grater
   - Spoon
   - Teapot
-  CorrectAnswer2: 3
+  AnswerObjectPrefab2: {fileID: 0}
+  CorrectAnswer2: 2
 --- !u!1 &2472690221906731622 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7262564569943683802, guid: f81d3a1928c05564ca5ed2093c61def1,
     type: 3}
   m_PrefabInstance: {fileID: 5087111928006938812}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7708692021269847916
+--- !u!114 &8466754313116762072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -372,21 +374,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 2472690221906731622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68cf3c3385ba0914a8e7f790a09525ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e5c7bb14779d05448a8f0a7fa8c32c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 1
   QuestionText:
   - "\u0427\u0442\u043E \u044D\u0442\u043E \u0437\u0430 \u043E\u0431\u044A\u0435\u043A\u0442?"
   AnswerText:
   - Road
   - Wood
   - Soccer ball
-  CorrectAnswer: 3
+  AnswerObjectPrefab: {fileID: 0}
+  CorrectAnswer: 2
   QuestionText2:
   - "\u0427\u0442\u043E \u044D\u0442\u043E \u0437\u0430 \u043E\u0431\u044A\u0435\u043A\u0442?"
   AnswerText2:
   - Sunscreen
   - Towel
   - Sunglasses
-  CorrectAnswer2: 3
+  AnswerObjectPrefab2: {fileID: 0}
+  CorrectAnswer2: 2

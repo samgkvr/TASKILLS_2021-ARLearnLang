@@ -53,10 +53,10 @@ public class InteractibleMenu : MonoBehaviour
         {
             MenuScale(m_Menu[2], m_MenuObjects[2]);
         }
-        if (m_MenuObjects[2].scalingFinish && !m_MenuObjects[3].scalingFinish)
-        {
-            MenuScale(m_Menu[3], m_MenuObjects[3]);
-        }
+        //if (m_MenuObjects[2].scalingFinish && !m_MenuObjects[3].scalingFinish)
+        //{
+        //    MenuScale(m_Menu[3], m_MenuObjects[3]);
+        //}
 
         if (Input.touchCount == 1)
         {
@@ -78,14 +78,9 @@ public class InteractibleMenu : MonoBehaviour
                             SelectedMenu(touchedObject.GetComponent<MenuObject>(), m_MenuObjects);
                         }
 
-                        if (touchedObject.GetComponent<MenuVariablesObject_A>())
+                        if (touchedObject.GetComponent<MenuVariablesObject>())
                         {
-                            m_ARSceneObjectManager.DisableInteractibleMenus_A(touchedObject.GetComponent<MenuVariablesObject_A>());
-                        }
-
-                        if (touchedObject.GetComponent<MenuVariablesObject_B>())
-                        {
-                            m_ARSceneObjectManager.DisableInteractibleMenus_B(touchedObject.GetComponent<MenuVariablesObject_B>());
+                            m_ARSceneObjectManager.DisableInteractibleMenus(touchedObject.GetComponent<MenuVariablesObject>().IDScene);
                         }
                     }
                 }

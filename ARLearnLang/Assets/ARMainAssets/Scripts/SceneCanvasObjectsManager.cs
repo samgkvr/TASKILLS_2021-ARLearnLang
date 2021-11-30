@@ -12,16 +12,16 @@ public class SceneCanvasObjectsManager : MonoBehaviour
     private Canvas[] sceneCanvas;
 
     [SerializeField]
-    private GameObject[] sceneCanvasObject;
+    private GameObject sceneCanvasObject;
+
+    public GameObject[] ModuleObjects;
+
+    public int m_CurrentSceneID;
+
+    private int m_correctAnswer;
 
     [SerializeField]
-    private TMP_Text[] m_QuestionText;
-
-    [SerializeField]
-    private GameObject[] m_AnswerButtonObject;
-
-    [SerializeField]
-    private TMP_Text[] m_AnswerText;
+    private TMP_Text TextNumberScene;
 
     private void Awake()
     {
@@ -31,26 +31,80 @@ public class SceneCanvasObjectsManager : MonoBehaviour
         {
             sceneCanvas[i].worldCamera = m_ARMainSceneManager.Camera;
         }
-    }
 
-    public void SetActiveSceneCanvasObjects(bool value)
-    {
-        for (int i = 0; i < sceneCanvasObject.Length; i++)
+        if (!sceneCanvasObject.activeSelf)
         {
-            sceneCanvasObject[i].gameObject.SetActive(value);
+            sceneCanvasObject.gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < ModuleObjects.Length; i++)
+        {
+            if (!ModuleObjects[i].activeSelf)
+            {
+                ModuleObjects[i].gameObject.SetActive(false);
+            }
         }
     }
 
-    public void SetSceneOptions(string[] questionOptionsText, string[] answerOptionsText, int correctAnswer)
+    public void SetActiveSceneCanvasObject(bool value)
     {
-        for (int i = 0; i < questionOptionsText.Length; i++)
-        {
-            m_QuestionText[i].text = questionOptionsText[i];
-        }
+        sceneCanvasObject.gameObject.SetActive(value);
+        DisableALLScene();
+    }
 
-        for (int i = 0; i < answerOptionsText.Length; i++)
+    public void ButtonAnswer(int idButton)
+    {
+        if (idButton == m_correctAnswer)
         {
-            m_AnswerText[i].text = answerOptionsText[i];
+            Debug.Log("Answer true");
+            m_ARSceneObjectManager.OnButtonNext();
+        }
+        else
+        {
+            Debug.Log("Answer false, try again");
+        }
+    }
+
+    public void TriggerAnswerModuleA(bool isRight)
+    {
+        if (isRight)
+        {
+            ChangeScene(m_CurrentSceneID + 1);
+        }
+    }
+
+    public void TriggerAnswerModuleB(int IDScene)
+    {
+        SceneBCInputFieldManager m_SceneBCInputFieldManager = ModuleObjects[IDScene].GetComponent<SceneBCInputFieldManager>();
+        if (m_SceneBCInputFieldManager.InputField.text == m_SceneBCInputFieldManager.AnswerText)
+        {
+            ChangeScene(m_CurrentSceneID + 1);
+        }
+    }
+
+    public void ChangeScene(int IDScene)
+    {
+        TextNumberScene.text = "Модуль: " + ModuleObjects[IDScene].name;
+        for (int i = 0; i < ModuleObjects.Length; i++)
+        {
+            if (ModuleObjects[i] != ModuleObjects[IDScene])
+            {
+                ModuleObjects[i].SetActive(false);
+            }
+            else
+            {
+                m_CurrentSceneID = IDScene;
+                ModuleObjects[IDScene].SetActive(true);
+            }
+        }
+    }
+
+    private void DisableALLScene()
+    {
+        for (int i = 0; i < ModuleObjects.Length; i++)
+        {
+            m_CurrentSceneID = -1;
+            ModuleObjects[i].SetActive(false);
         }
     }
 }
