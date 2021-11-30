@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class SceneCanvasObjectsManager : MonoBehaviour
 {
@@ -18,13 +19,20 @@ public class SceneCanvasObjectsManager : MonoBehaviour
 
     public int m_CurrentSceneID;
 
-    private int m_correctAnswer;
+    [SerializeField]
+    private TMP_Text TextAnswerScene;
 
     [SerializeField]
     private TMP_Text TextNumberScene;
 
+    [SerializeField]
+    private GameObject WinObject;
+
     private void Awake()
     {
+        TextAnswerScene.text = "";
+        TextAnswerScene.color = Color.white;
+
         m_ARMainSceneManager = m_ARSceneObjectManager.m_ARMainSceneManager;
 
         for (int i = 0; i < sceneCanvas.Length; i++)
@@ -52,24 +60,20 @@ public class SceneCanvasObjectsManager : MonoBehaviour
         DisableALLScene();
     }
 
-    public void ButtonAnswer(int idButton)
-    {
-        if (idButton == m_correctAnswer)
-        {
-            Debug.Log("Answer true");
-            m_ARSceneObjectManager.OnButtonNext();
-        }
-        else
-        {
-            Debug.Log("Answer false, try again");
-        }
-    }
-
     public void TriggerAnswerModuleA(bool isRight)
     {
         if (isRight)
         {
-            ChangeScene(m_CurrentSceneID + 1);
+            SpawnWin();
+            TextAnswerScene.text = "Поздравляем!";
+            TextAnswerScene.color = Color.green;
+            StartCoroutine(TimerChangeScene(m_CurrentSceneID + 1));
+            //ChangeScene(m_CurrentSceneID + 1);
+        }
+        else
+        {
+            TextAnswerScene.text = "Вы неверно ответили на вопрос";
+            TextAnswerScene.color = Color.red;
         }
     }
 
@@ -78,12 +82,23 @@ public class SceneCanvasObjectsManager : MonoBehaviour
         SceneBCInputFieldManager m_SceneBCInputFieldManager = ModuleObjects[IDScene].GetComponent<SceneBCInputFieldManager>();
         if (m_SceneBCInputFieldManager.InputField.text == m_SceneBCInputFieldManager.AnswerText)
         {
-            ChangeScene(m_CurrentSceneID + 1);
+            SpawnWin();
+            TextAnswerScene.text = "Поздравляем!";
+            TextAnswerScene.color = Color.green;
+            StartCoroutine(TimerChangeScene(m_CurrentSceneID + 1));
+            //ChangeScene(m_CurrentSceneID + 1);
+        }
+        else
+        {
+            TextAnswerScene.text = "Вы неверно ответили на вопрос";
+            TextAnswerScene.color = Color.red;
         }
     }
 
     public void ChangeScene(int IDScene)
     {
+        TextAnswerScene.text = "";
+        TextAnswerScene.color = Color.white;
         TextNumberScene.text = "Модуль: " + ModuleObjects[IDScene].name;
         for (int i = 0; i < ModuleObjects.Length; i++)
         {
@@ -97,6 +112,20 @@ public class SceneCanvasObjectsManager : MonoBehaviour
                 ModuleObjects[IDScene].SetActive(true);
             }
         }
+    }
+
+    private void SpawnWin()
+    {
+        GameObject temp = Instantiate(WinObject, new Vector3(0, 1, 1), Quaternion.identity);
+        Destroy(temp, 5);
+    }
+
+
+    IEnumerator TimerChangeScene(int IDScene)
+    {
+        yield return new WaitForSeconds(5);
+        ChangeScene(IDScene);
+        StopCoroutine("TimerChangeScene");
     }
 
     private void DisableALLScene()

@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 22732925}
   - component: {fileID: 22732927}
   - component: {fileID: 22732926}
+  - component: {fileID: 22732928}
   m_Layer: 0
   m_Name: ARCamera
   m_TagString: Untagged
@@ -327,6 +328,14 @@ MonoBehaviour:
   m_EnvironmentDepthMode: 1
   m_EnvironmentDepthTemporalSmoothing: 1
   m_OcclusionPreferenceMode: 0
+--- !u!81 &22732928
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22732919}
+  m_Enabled: 1
 --- !u!1 &300681911
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +371,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.9437692}
   m_AnchorMax: {x: 1, y: 0.9636923}
-  m_AnchoredPosition: {x: -1.2384033, y: -1}
+  m_AnchoredPosition: {x: -1.2382812, y: -1}
   m_SizeDelta: {x: -2.4767, y: 3.0000763}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &300681913
