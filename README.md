@@ -3,6 +3,6 @@
  Наше приложение расчитано для школьников на домашней форме обучения, а также для 
  самостоятельной работы всех заинтересованных в изучении английского языка.
  ---
- Ознакомиться с подробным описанием нашего Вы можете в [Презентации](https://github.com/samgkvr/TASKILLS-2021_ARLearnLang/raw/main/Pres.pptx)
+ Ознакомиться с подробным описанием нашего Вы можете в [Презентации](https://github.com/samgkvr/TASKILLS_2021-ARLearnLang/raw/main/Pres.pptx)
  ---
- Протестировать наше приложение можно скачав усановочный [Файл](https://github.com/samgkvr/TASKILLS-2021_ARLearnLang/raw/main/ARLearnLang_Build.apk) для платформы Android
+ Протестировать наше приложение можно скачав усановочный [Файл](https://github.com/samgkvr/TASKILLS_2021-ARLearnLang/raw/main/ARLearnLang_Build.apk) для платформы Android
